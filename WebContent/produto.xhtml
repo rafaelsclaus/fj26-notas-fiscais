@@ -5,75 +5,89 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Sistema de Notas Fiscais</title>
+	<title>Sistema de Notas Fiscais - UberDist</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
-	<h:form>
 
-		<h2>
-			<h:outputText value="Novo Produto"
-				rendered="#{empty produtoBean.produto.id}" />
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logo-uber.png"
+			id="logoCompany" />
+	</div>
 
-			<h:outputText value="Editar Produto"
-				rendered="#{not empty produtoBean.produto.id}" />
-		</h2>
+	<div id="conteudo">
+		<h:form>
 
-		<h:inputHidden value="#{produtoBean.produto.id}" />
+			<h2>
+				<h:outputText value="Novo Produto"
+					rendered="#{empty produtoBean.produto.id}" />
 
-		<h:panelGrid columns="2">
-
-			<h:outputLabel value="Nome:" for="nome" />
-			<h:inputText id="nome" value="#{produtoBean.produto.nome}" />
-
-			<h:outputLabel value="Descricao" for="descricao" />
-			<h:inputText id="descricao" value="#{produtoBean.produto.descricao}" />
-
-			<h:outputLabel value="Preco:" for="preco" />
-			<h:inputText id="preco" value="#{produtoBean.produto.preco}" />
-
-			<h:commandButton value="Gravar" action="#{produtoBean.grava}">
-				<f:ajax render="@form :formTabela" execute="@form" />
-			</h:commandButton>
-
-		</h:panelGrid>
-	</h:form>
+				<h:outputText value="Editar Produto"
+					rendered="#{not empty produtoBean.produto.id}" />
+			</h2>
+		<fildset>
+			<legend>Dados do Produto</legend>
+		
+			<h:inputHidden value="#{produtoBean.produto.id}" />
 
 
-	<h:form id="formTabela">
-	
-	<h:dataTable value="#{produtoBean.produtos}" var="produto" border="1">
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText id="nome" value="#{produtoBean.produto.nome}" />
 
-		<h:column>
-			<f:facet name="header">Nome</f:facet>
+				<h:outputLabel value="Descricao" for="descricao" />
+				<h:inputText id="descricao" value="#{produtoBean.produto.descricao}" />
+
+				<h:outputLabel value="Preco:" for="preco" />
+				<h:inputText id="preco" value="#{produtoBean.produto.preco}" />
+
+				<h:commandButton value="Gravar" action="#{produtoBean.grava}">
+					<f:ajax render="@form :formTabela" execute="@form" />
+				</h:commandButton>
+			</fildset>
+		</h:form>
+
+		<h2>Listagem de Produtos</h2>
+		
+		<h:form id="formTabela">
+
+			<h:dataTable value="#{produtoBean.produtos}" var="produto" 
+				styleClass="dados" rowClasses="impar,par">
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
 					#{produto.nome}
 			</h:column>
 
-		<h:column>
-			<f:facet name="header">Descricao</f:facet>
+				<h:column>
+					<f:facet name="header">Descricao</f:facet>
 					#{produto.descricao}
 			</h:column>
 
-		<h:column>
-			<f:facet name="header">Preco</f:facet>
+				<h:column>
+					<f:facet name="header">Preco</f:facet>
 					#{produto.preco}
 			</h:column>
 
-		<h:column>
-			<f:facet name="header">Acoes</f:facet>
-			<h:commandLink action="#{produtoBean.remove(produto)}"
-				value="Remover">
-				<f:ajax render="@form" />
-			</h:commandLink>
+				<h:column>
+					<f:facet name="header">Acoes</f:facet>
+					<h:commandLink action="#{produtoBean.remove(produto)}"
+						value="Remover">
+						<f:ajax render="@form" />
+					</h:commandLink>
 
-			<h:commandLink value="Alterar">
-				<f:setPropertyActionListener value="#{produto}"
-					target="#{produtoBean.produto}" />
-			</h:commandLink>
+					<h:commandLink value="Alterar">
+						<f:setPropertyActionListener value="#{produto}"
+							target="#{produtoBean.produto}" />
+					</h:commandLink>
 
-		</h:column>
+				</h:column>
 
-	</h:dataTable>
-	</h:form>
-	
+			</h:dataTable>
+		</h:form>
+	</div>
+	<div id="rodape">
+		Copyright 2013
+		Todos os direitos reservados a Rafael Claus
+	</div>
 </h:body>
 </html>
