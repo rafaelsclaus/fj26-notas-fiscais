@@ -9,20 +9,71 @@
 </h:head>
 <h:body>
 	<h:form>
+
+		<h2>
+			<h:outputText value="Novo Produto"
+				rendered="#{empty produtoBean.produto.id}" />
+
+			<h:outputText value="Editar Produto"
+				rendered="#{not empty produtoBean.produto.id}" />
+		</h2>
+
+		<h:inputHidden value="#{produtoBean.produto.id}" />
+
 		<h:panelGrid columns="2">
 
-		<h:outputLabel value="Nome:" for="nome" />
-		<h:inputText id="nome" value="#{produtoBean.produto.nome}" />
+			<h:outputLabel value="Nome:" for="nome" />
+			<h:inputText id="nome" value="#{produtoBean.produto.nome}" />
 
-		<h:outputLabel value="Descricao" for="descricao" />
-		<h:inputText id="descricao" value="#{produtoBean.produto.descricao}" />
+			<h:outputLabel value="Descricao" for="descricao" />
+			<h:inputText id="descricao" value="#{produtoBean.produto.descricao}" />
 
-		<h:outputLabel value="Preco:" for="preco" />
-		<h:inputText id="preco" value="#{produtoBean.produto.preco}"/>
+			<h:outputLabel value="Preco:" for="preco" />
+			<h:inputText id="preco" value="#{produtoBean.produto.preco}" />
 
-		<h:commandButton value="Gravar" action="#{produtoBean.grava}"/>
+			<h:commandButton value="Gravar" action="#{produtoBean.grava}">
+				<f:ajax render="@form :formTabela" execute="@form" />
+			</h:commandButton>
 
 		</h:panelGrid>
 	</h:form>
+
+
+	<h:form id="formTabela">
+	
+	<h:dataTable value="#{produtoBean.produtos}" var="produto" border="1">
+
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+					#{produto.nome}
+			</h:column>
+
+		<h:column>
+			<f:facet name="header">Descricao</f:facet>
+					#{produto.descricao}
+			</h:column>
+
+		<h:column>
+			<f:facet name="header">Preco</f:facet>
+					#{produto.preco}
+			</h:column>
+
+		<h:column>
+			<f:facet name="header">Acoes</f:facet>
+			<h:commandLink action="#{produtoBean.remove(produto)}"
+				value="Remover">
+				<f:ajax render="@form" />
+			</h:commandLink>
+
+			<h:commandLink value="Alterar">
+				<f:setPropertyActionListener value="#{produto}"
+					target="#{produtoBean.produto}" />
+			</h:commandLink>
+
+		</h:column>
+
+	</h:dataTable>
+	</h:form>
+	
 </h:body>
 </html>

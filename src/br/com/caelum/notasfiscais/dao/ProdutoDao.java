@@ -24,7 +24,6 @@ public class ProdutoDao implements Serializable{
 		manager.close();
 	}
 
-
 	public void remove(Produto produto) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
