@@ -8,7 +8,7 @@ import br.com.caelum.notasfiscais.dao.ProdutoDao;
 import br.com.caelum.notasfiscais.modelo.Produto;
 
 @ManagedBean
-public class ProdutoBean {
+public class ProdutoBean{
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
 	
@@ -29,7 +29,7 @@ public class ProdutoBean {
 	}
 	
 	public void grava(){
-		
+		System.out.println("Sera que vai passar por aqui?");
 		ProdutoDao dao = new ProdutoDao();
 		
 		if(produto.getId() == null){

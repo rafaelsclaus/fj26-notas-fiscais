@@ -10,12 +10,13 @@
 </h:head>
 <h:body>
 
-	<div id="cabecalho">
+	<header >
 		<h:graphicImage library="imagens" name="logo-uber.png"
 			id="logoCompany" />
-	</div>
+			<div id="usuarioLogado"> Logado como : #{loginBean.usuario.login}</div>
+	</header>
 
-	<div id="conteudo">
+	<section>
 		<h:form>
 
 			<h2>
@@ -84,10 +85,10 @@
 
 			</h:dataTable>
 		</h:form>
-	</div>
-	<div id="rodape">
+	</section>
+	<footer>
 		Copyright 2013
 		Todos os direitos reservados a Rafael Claus
-	</div>
+	</footer>
 </h:body>
 </html>
