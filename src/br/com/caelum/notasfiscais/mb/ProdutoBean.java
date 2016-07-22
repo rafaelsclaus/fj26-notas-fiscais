@@ -47,4 +47,5 @@ public class ProdutoBean{
 		this.produtos = dao.listaTodos();
 	}
 	
+
 }

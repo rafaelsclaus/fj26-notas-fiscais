@@ -27,11 +27,15 @@ public class LoginBean implements Serializable{
 			usuarioLogadoBean.logar(usuario);
 			return "produto?faces-redirect=true";
 		}else {
-			usuarioLogadoBean.deslogar();
-			return "login?faces-redirect=true";
+			return logout();
 		}
 		
 	}
+	public String logout() {
+		usuarioLogadoBean.deslogar();
+		return "login?faces-redirect=true";
+	}
+	
 	
 	public Usuario getUsuario(){
 		return this.usuario;

@@ -13,7 +13,9 @@
 	<header >
 		<h:graphicImage library="imagens" name="logo-uber.png"
 			id="logoCompany" />
-			<div id="usuarioLogado"> Logado como : #{usuarioLogadoBean.usuario.login}</div>
+			<div id="usuarioLogado"> Logado como : #{usuarioLogadoBean.usuario.login}
+				<h:form> <h:commandLink value="Logout" action="#{loginBean.logout}"/> </h:form>
+			</div>
 	</header>
 
 	<section>
@@ -44,6 +46,7 @@
 				<h:commandButton value="Gravar" action="#{produtoBean.grava}">
 					<f:ajax render="@form :formTabela" execute="@form" />
 				</h:commandButton>
+				
 			</fildset>
 		</h:form>
 
