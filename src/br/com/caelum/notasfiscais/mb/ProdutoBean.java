@@ -2,20 +2,28 @@ package br.com.caelum.notasfiscais.mb;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.caelum.notasfiscais.dao.ProdutoDao;
 import br.com.caelum.notasfiscais.modelo.Produto;
+import br.com.caelum.notasfiscais.tx.Transational;
 
-@ManagedBean
+
+
+@Named @RequestScoped
 public class ProdutoBean{
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
 	
+	@Inject
+	private ProdutoDao dao;
+	
 	public List<Produto> getProdutos(){
 		if (produtos == null) {
 			System.out.println("Carregando produtos...");
-			produtos = new ProdutoDao().listaTodos();
+			produtos = dao.listaTodos();
 		}
 		return produtos;
 	}
@@ -28,9 +36,9 @@ public class ProdutoBean{
 		this.produto = produto;
 	}
 	
+	@Transational
 	public void grava(){
 		System.out.println("Sera que vai passar por aqui?");
-		ProdutoDao dao = new ProdutoDao();
 		
 		if(produto.getId() == null){
 			dao.adiciona(produto);
@@ -41,8 +49,8 @@ public class ProdutoBean{
 		this.produto = new Produto();
 	}
 	
+	@Transational
 	public void remove(Produto produto){
-		ProdutoDao dao = new ProdutoDao();
 		dao.remove(produto);
 		this.produtos = dao.listaTodos();
 	}

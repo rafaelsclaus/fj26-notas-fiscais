@@ -37,6 +37,10 @@ public class Autorizador implements PhaseListener {
 			context.renderResponse();
 		}
 		
+		if ("/index.xhtml".equals(context.getViewRoot().getViewId())) {
+			return ;
+		}
+		
 	}
 
 	@Override

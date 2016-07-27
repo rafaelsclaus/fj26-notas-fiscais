@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 
 @ApplicationScoped 
 public class JPAUtil implements Serializable{
+	
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("notas");
 
 	@PreDestroy
