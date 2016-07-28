@@ -3,48 +3,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
 
-		<h:form>
-			<fieldset>
-				<legend>Dados da nota</legend>
-				<h:outputLabel value="CNPJ do Cliente" />
-				<p:inputMask value="#{notaFiscalBeam.notaFiscal.cnpj}" mask="99.999.999-99"/>
+		<!--  Cliente mantido na conversa  -->
+		<h:outputLabel value="CNPJ do Cliente" />
+		<h:outputLabel value="#{conversationNotaFiscalBeam.notaFiscal.cnpj}" />
 
-				<h:outputLabel value="Data:" />
-				<p:calendar pattern="dd/MM/yyyy"
-					value="#{notaFiscalBeam.notaFiscal.data.time}" />
-			</fieldset>
+		<h:form>
 
 			<fieldset>
 				<legend>Dados do Item</legend>
 				<h:outputLabel value="Produto:" />
-				<h:selectOneMenu value="#{notaFiscalBeam.idProduto}">
+				<h:selectOneMenu value="#{conversationNotaFiscalBeam.idProduto}">
 					<f:selectItems value="#{produtoBean.produtos}" var="produto"
 						itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
 				</h:selectOneMenu>
 
 				<h:outputLabel value="Quantidade:" />
-				<h:inputText value="#{notaFiscalBeam.item.quantidade}" />
+				<h:inputText value="#{conversationNotaFiscalBeam.item.quantidade}" />
 				<h:commandButton value="Guardar Item"
-					action="#{notaFiscalBeam.guardaItem}" />
+					action="#{conversationNotaFiscalBeam.guardaItem}" />
 
+				<h:commandButton value="Voltar" action="notaFiscalCabecalho?faces-redirect=true" />
 			</fieldset>
 
-			<h:commandButton value="Gravar" action="#{notaFiscalBeam.gravar}">
-				<f:ajax render="@form" />
+			<h:commandButton value="Gravar" action="#{conversationNotaFiscalBeam.gravar}"> 
+				<f:ajax render="@form"/>
 			</h:commandButton>
 		</h:form>
 
 		<h2>Itens da nota fiscal</h2>
-
-		<h:dataTable value="#{notaFiscalBeam.notaFiscal.itens}" var="item"
+		
+		<h:dataTable value="#{conversationNotaFiscalBeam.notaFiscal.itens}" var="item"
 			styleClass="dados" rowClasses="impar,par">
-			
 			<h:column>
 				<f:facet name="header">Produto</f:facet>
 				   #{item.produto.nome}

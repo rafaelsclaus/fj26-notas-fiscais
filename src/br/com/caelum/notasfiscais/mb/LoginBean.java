@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.caelum.notasfiscais.dao.UsuarioDao;
 import br.com.caelum.notasfiscais.modelo.Usuario;
 
-@RequestScoped
-@Named
+@Model
 public class LoginBean implements Serializable{
 	private Usuario usuario = new Usuario();
 

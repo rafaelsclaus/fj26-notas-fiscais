@@ -2,9 +2,8 @@ package br.com.caelum.notasfiscais.mb;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.com.caelum.notasfiscais.dao.ProdutoDao;
 import br.com.caelum.notasfiscais.modelo.Produto;
@@ -12,7 +11,7 @@ import br.com.caelum.notasfiscais.tx.Transational;
 
 
 
-@Named @RequestScoped
+@Model
 public class ProdutoBean{
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
