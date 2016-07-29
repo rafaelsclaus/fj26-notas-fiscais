@@ -10,16 +10,23 @@
 	<ui:define name="corpo">
 
 		<h:form>
-			<fieldset>
-				<legend>Dados da nota</legend>
-				<h:outputLabel value="CNPJ do Cliente" />
-				<p:inputMask value="#{notaFiscalBeam.notaFiscal.cnpj}" mask="99.999.999-99"/>
+		 <h:messages />
+		<p:tabView>
+			<p:tab title="Nota">
+					<fieldset>
+						<legend>Dados da nota</legend>
+						<h:outputLabel value="CNPJ do Cliente" />
+						<p:inputMask value="#{notaFiscalBeam.notaFiscal.cnpj}" mask="99.999.999-99"/>
+		
+						<h:outputLabel value="Data:" />
+						<p:calendar pattern="dd/MM/yyyy"
+							value="#{notaFiscalBeam.notaFiscal.data.time}" />
+					</fieldset>
 
-				<h:outputLabel value="Data:" />
-				<p:calendar pattern="dd/MM/yyyy"
-					value="#{notaFiscalBeam.notaFiscal.data.time}" />
-			</fieldset>
-
+			</p:tab>
+		
+			<p:tab title="Item">
+			
 			<fieldset>
 				<legend>Dados do Item</legend>
 				<h:outputLabel value="Produto:" />
@@ -34,6 +41,9 @@
 					action="#{notaFiscalBeam.guardaItem}" />
 
 			</fieldset>
+
+			</p:tab>
+		</p:tabView>
 
 			<h:commandButton value="Gravar" action="#{notaFiscalBeam.gravar}">
 				<f:ajax render="@form" />

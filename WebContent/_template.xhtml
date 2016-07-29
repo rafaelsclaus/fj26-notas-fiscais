@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
@@ -12,6 +13,12 @@
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
+
+	<p:themeSwitcher style="width:150px">
+		<f:selectItem  itemLabel="Escolha o Tema" itemValue=""/>
+		<f:selectItem  itemLabel="Aristo" itemValue="aristo"/>
+		<f:selectItem  itemLabel="Bluesky" itemValue="bluesky"/>
+	</p:themeSwitcher>
 
 	<div id ="cabecalho" >
 		<h:graphicImage library="imagens" name="logo-uber.png"
@@ -26,6 +33,16 @@
 	</div>
 	
 	<div id ="conteudo" >
+		<h:form rendered="#{usuarioLogadoBean.logado}">
+			<p:menubar>
+				<p:menuitem value="Produtos" url="produto.xhtml" icon="ui-icon ui-icon-document"/>
+					<p:submenu>
+						<p:menuitem value="Cadastro" url="notaFiscal.xhtml" />
+						<p:menuitem value="Listagem" url="listanotas.xhtml" />					
+					</p:submenu>
+				<p:menuitem value="Sair" action="#{loginBean.logout}" />
+			</p:menubar>
+		</h:form>
 		<ui:insert name="corpo" />
 	</div>
 	
